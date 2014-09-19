@@ -1,0 +1,21 @@
+{
+    "name": "matthewpatterson/carpenter",
+    "description": "A library to set up database models with test data",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Patterson",
+            "email": "matthew.s.patterson@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.2.*@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Carpenter\\": "src/",
+            "Fixture\\": "tests/"
+        }
+    }
+}
