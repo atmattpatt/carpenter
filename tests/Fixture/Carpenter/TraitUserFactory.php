@@ -2,10 +2,12 @@
 
 namespace Fixture\Carpenter;
 
-/** @Factory(\Fixture\Carpenter\User) */
+use Carpenter\Annotation\Factory;
+
+/** @Factory("\Fixture\Carpenter\User") */
 class TraitUserFactory extends BasicUserFactory
 {
-    $status = 'new';
+    public $status = 'new';
 
     /** @Trait */
     public function deleted($template)

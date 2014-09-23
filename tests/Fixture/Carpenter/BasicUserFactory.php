@@ -2,7 +2,9 @@
 
 namespace Fixture\Carpenter;
 
-/** @Factory(\Fixture\Carpenter\User) */
+use Carpenter\Annotation\Factory;
+
+/** @Factory("\Fixture\Carpenter\User") */
 class BasicUserFactory
 {
     public $username = 'Bob';

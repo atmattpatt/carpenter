@@ -2,8 +2,10 @@
 
 namespace Fixture\Carpenter;
 
-/** @Factory(\Fixture\Carpenter\User) */
-class BasicUserFactory extends BasicUserFactory
+use Carpenter\Annotation\Factory;
+
+/** @Factory("\Fixture\Carpenter\User") */
+class DynamicUserFactory extends BasicUserFactory
 {
     public function password($template)
     {

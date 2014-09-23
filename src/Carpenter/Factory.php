@@ -9,8 +9,8 @@ class Factory
         $arguments = func_get_args();
         $traits    = [];
         $overrides = [];
-
         $factory = array_shift($arguments);
+
         if (count($arguments) > 1) {
             $overrides = array_pop($arguments);
             $traits = $arguments;
@@ -21,5 +21,19 @@ class Factory
         }
 
         printf("Building %s with traits %s and overrides %s", $factory, var_export($traits, true), var_export($overrides, true));
+    }
+
+
+    public static function create()
+    {
+        $built = call_user_func_array('static::build', func_get_args());
+
+        printf("Creating %s with traits %s and overrides %s", $factory, var_export($traits, true), var_export($overrides, true));
+    }
+
+    public static function discoverFactories()
+    {
+        $finder = new FactoryFinder();
+        FactoryRegistry::registerFactories($finder->getFactories());
     }
 }
