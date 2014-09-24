@@ -7,8 +7,8 @@ use Carpenter\Annotation\Factory;
 /** @Factory("\Fixture\Carpenter\User") */
 class DynamicUserFactory extends BasicUserFactory
 {
-    public function password($template)
+    public function password()
     {
-        return sha1($template->username . "password1");
+        return sha1($this->username . "password1");
     }
 }

@@ -7,7 +7,10 @@ use Doctrine\Common\Annotations\Annotation;
 /** @Annotation */
 class Factory
 {
-	public function __construct($class)
-	{
+    public $targetClass;
+
+    public function __construct($args)
+    {
+        $this->targetClass = array_shift($args);
 	}
 }

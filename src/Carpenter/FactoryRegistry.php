@@ -9,9 +9,7 @@ class FactoryRegistry
 	public static function registerFactories($factoryClasses)
 	{
 		foreach ((array) $factoryClasses as $class) {
-			$name = static::getFactoryName($class);
-
-			self::$factories[$name] = true;
+            self::addFactoryForClass($class);
 		}
 	}
 
@@ -19,6 +17,13 @@ class FactoryRegistry
 	{
 		return isset(self::$factories[$factory]);
 	}
+
+    private static function addFactoryForClass($class)
+    {
+        $name = static::getFactoryName($class);
+
+        self::$factories[$name] = true;
+    }
 
 	private static function getFactoryName($class)
 	{
