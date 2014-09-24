@@ -4,19 +4,19 @@ namespace Carpenter;
 
 class FactoryRegistry
 {
-	private static $factories = [];
+    private static $factories = [];
 
-	public static function registerFactories($factoryClasses)
-	{
-		foreach ((array) $factoryClasses as $class) {
+    public static function registerFactories($factoryClasses)
+    {
+        foreach ((array) $factoryClasses as $class) {
             self::addFactoryForClass($class);
-		}
-	}
+        }
+    }
 
-	public static function isFactoryDefined($factory)
-	{
-		return isset(self::$factories[$factory]);
-	}
+    public static function isFactoryDefined($factory)
+    {
+        return isset(self::$factories[$factory]);
+    }
 
     private static function addFactoryForClass($class)
     {
@@ -25,10 +25,10 @@ class FactoryRegistry
         self::$factories[$name] = true;
     }
 
-	private static function getFactoryName($class)
-	{
-		$namespaces = explode('\\', $class);
+    private static function getFactoryName($class)
+    {
+        $namespaces = explode('\\', $class);
 
-		return array_pop($namespaces);
-	}
+        return array_pop($namespaces);
+    }
 }

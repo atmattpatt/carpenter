@@ -8,48 +8,48 @@ use Symfony\Component\Finder\Finder;
 
 class FactoryFinder
 {
-	private $paths = [];
+    private $paths = [];
 
-	public function __construct()
-	{
-		$this->addPath(getcwd() . '/tests');
-	}
+    public function __construct()
+    {
+        $this->addPath(getcwd() . '/tests');
+    }
 
-	public function addPath($path)
-	{
-		$this->paths[] = $path;
-	}
+    public function addPath($path)
+    {
+        $this->paths[] = $path;
+    }
 
-	public function discoverFactories()
-	{
-		$this->loadFactories();
+    public function discoverFactories()
+    {
+        $this->loadFactories();
 
-		return $this->getDefinedFactories();
-	}
+        return $this->getDefinedFactories();
+    }
 
-	public function loadFactories()
-	{
-		$finder = new Finder();
-		$finder
-			->files()
-			->in($this->paths)
-			->name('*Factory.php');
+    public function loadFactories()
+    {
+        $finder = new Finder();
+        $finder
+            ->files()
+            ->in($this->paths)
+            ->name('*Factory.php');
 
-		foreach ($finder as $file) {
-			include_once($file);
-		}
-	}
+        foreach ($finder as $file) {
+            include_once($file);
+        }
+    }
 
-	public function getDefinedFactories()
-	{
-		return array_filter(get_declared_classes(), array($this, 'isFactory'));
-	}
+    public function getDefinedFactories()
+    {
+        return array_filter(get_declared_classes(), array($this, 'isFactory'));
+    }
 
-	private function isFactory($class)
-	{
-		$reader = new AnnotationReader();
+    private function isFactory($class)
+    {
+        $reader = new AnnotationReader();
 
-		$reflection = new ReflectionClass($class);
-		return $reader->getClassAnnotation($reflection, '\Carpenter\Annotation\Factory') !== null;
-	}
+        $reflection = new ReflectionClass($class);
+        return $reader->getClassAnnotation($reflection, '\Carpenter\Annotation\Factory') !== null;
+    }
 }

@@ -12,5 +12,5 @@ class Factory
     public function __construct($args)
     {
         $this->targetClass = array_shift($args);
-	}
+    }
 }

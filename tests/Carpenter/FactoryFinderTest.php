@@ -4,30 +4,30 @@ namespace Carpenter;
 
 class FactoryFinderTest extends \PHPUnit_Framework_TestCase
 {
-	public function testConstructor()
-	{
-		$finder = new FactoryFinder();
+    public function testConstructor()
+    {
+        $finder = new FactoryFinder();
 
-		$this->assertAttributeContains(getcwd() . '/tests', 'paths', $finder);
-	}
+        $this->assertAttributeContains(getcwd() . '/tests', 'paths', $finder);
+    }
 
-	public function testAddPath()
-	{
-		$finder = new FactoryFinder();
-		$path = '/some/path/to/factories';
+    public function testAddPath()
+    {
+        $finder = new FactoryFinder();
+        $path = '/some/path/to/factories';
 
-		$finder->addPath($path);
+        $finder->addPath($path);
 
-		$this->assertAttributeContains($path, 'paths', $finder);
-	}
+        $this->assertAttributeContains($path, 'paths', $finder);
+    }
 
-	public function testDiscoverFactories()
-	{
-		$finder = new FactoryFinder();
-		$finder->addPath(realpath(__DIR__ . '/../Fixture'));
+    public function testDiscoverFactories()
+    {
+        $finder = new FactoryFinder();
+        $finder->addPath(realpath(__DIR__ . '/../Fixture'));
 
-		$factories = $finder->discoverFactories();
+        $factories = $finder->discoverFactories();
 
-		$this->assertContains('Fixture\Carpenter\BasicUserFactory', $factories);
-	}
+        $this->assertContains('Fixture\Carpenter\BasicUserFactory', $factories);
+    }
 }
