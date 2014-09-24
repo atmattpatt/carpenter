@@ -19,7 +19,7 @@
     "autoload": {
         "psr-0": {
             "Carpenter\\": "src/",
-            "Fixture\\": "tests/Fixture/"
+            "Fixture\\": "tests/"
         }
     }
 }
