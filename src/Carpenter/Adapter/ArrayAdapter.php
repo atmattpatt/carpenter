@@ -4,7 +4,7 @@ namespace Carpenter\Adapter;
 
 use ReflectionClass;
 
-class ArrayAdapter
+class ArrayAdapter implements AdapterInterface
 {
     public function build($_, $resolved)
     {
