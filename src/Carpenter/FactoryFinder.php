@@ -12,7 +12,9 @@ class FactoryFinder
 
     public function __construct()
     {
-        $this->addPath(getcwd() . '/tests');
+        foreach (Configuration::$factoryPaths as $path) {
+            $this->addPath($path);
+        }
     }
 
     public function addPath($path)

@@ -67,4 +67,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $user);
     }
+
+    public function testDiscoverFactories()
+    {
+        Configuration::$factoryPaths = [__DIR__ . '/../Fixture'];
+        Factory::discoverFactories();
+
+        $this->assertTrue(FactoryRegistry::isFactoryDefined('BasicUser'));
+        $this->assertTrue(FactoryRegistry::isFactoryDefined('DynamicUser'));
+        $this->assertTrue(FactoryRegistry::isFactoryDefined('ModifierUser'));
+    }
 }
