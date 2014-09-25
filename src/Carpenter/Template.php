@@ -17,21 +17,26 @@ class Template
         $this->factory = $factory;
     }
 
-    public function apply()
+    public function apply($adapter, $resolved)
     {
+        return $adapter->build($this->targetClass, $resolved);
     }
 
     public function resolve(array $modifiers = [], array $overrides = [])
     {
-        $this->resolveDeferreds();
+        $resolved = clone $this->factory;
+
+        $this->resolveDeferreds($resolved);
 
         foreach ($modifiers as $modifier) {
-            $this->applyModifier($modifier);
+            $this->applyModifier($resolved, $modifier);
         }
 
         foreach ($overrides as $key => $value) {
-            $this->applyOverride($key, $value);
+            $this->applyOverride($resolved, $key, $value);
         }
+
+        return $resolved;
     }
 
     public function addDeferred($deferred)
@@ -49,20 +54,20 @@ class Template
         $this->targetClass = $target;
     }
 
-    private function resolveDeferreds()
+    private function resolveDeferreds($factory)
     {
         foreach ($this->deferreds as $deferred) {
-            $this->factory->{$deferred} = call_user_func(array($this->factory, $deferred));
+            $factory->{$deferred} = call_user_func(array($this->factory, $deferred));
         }
     }
 
-    private function applyModifier($modifier)
+    private function applyModifier($factory, $modifier)
     {
-        call_user_func(array($this->factory, $modifier));
+        call_user_func(array($factory, $modifier));
     }
 
-    private function applyOverride($key, $value)
+    private function applyOverride($factory, $key, $value)
     {
-        $this->factory->{$key} = $value;
+        $factory->{$key} = $value;
     }
 }

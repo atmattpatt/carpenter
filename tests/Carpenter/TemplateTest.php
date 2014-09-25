@@ -10,6 +10,22 @@ use ReflectionMethod;
 
 class TemplateTest extends \PHPUnit_Framework_TestCase
 {
+    public function testApply()
+    {
+        $factory = new DynamicUserFactory();
+        $template = new Template($factory);
+        $template->addDeferred('password');
+        $adapter = new Adapter\ArrayAdapter();
+
+        $resolved = $template->resolve();
+        $built = $template->apply($adapter, $resolved);
+
+        $this->assertEquals([
+            'username' => 'Bob',
+            'password' => sha1('Bobpassword1'),
+        ], $built);
+    }
+
     public function testResolve()
     {
         $factory = new DynamicUserFactory();
@@ -17,9 +33,11 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         $template->addDeferred('password');
         $expected = sha1($factory->username . "password1");
 
-        $template->resolve();
+        $resolved = $template->resolve();
 
-        $this->assertEquals($expected, $factory->password);
+        $this->assertInstanceOf('\Fixture\Carpenter\DynamicUserFactory', $resolved);
+        $this->assertNotSame($factory, $resolved);
+        $this->assertEquals($expected, $resolved->password);
     }
 
     public function testResolveWithModifiers()
@@ -28,10 +46,10 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         $template = new Template($factory);
         $template->addModifier('deleted');
 
-        $template->resolve(['deleted']);
+        $resolved = $template->resolve(['deleted']);
 
-        $this->assertEquals('deleted', $factory->status);
-        $this->assertNull($factory->password);
+        $this->assertEquals('deleted', $resolved->status);
+        $this->assertNull($resolved->password);
     }
 
     public function testResolveWithOverrides()
@@ -39,10 +57,10 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         $factory = new ModifierUserFactory();
         $template = new Template($factory);
 
-        $template->resolve([], ['status' => 'suspended']);
+        $resolved = $template->resolve([], ['status' => 'suspended']);
 
-        $this->assertEquals('suspended', $factory->status);
-        $this->assertEquals('password1', $factory->password);
+        $this->assertEquals('suspended', $resolved->status);
+        $this->assertEquals('password1', $resolved->password);
     }
 
     public function testConstructor()

@@ -4,31 +4,67 @@ namespace Carpenter;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
+    protected static $originalAdapter;
+
+    public function setUp()
+    {
+        Configuration::$adapter = new Adapter\ArrayAdapter();
+        Factory::discoverFactories();
+    }
+
+    public function tearDown()
+    {
+        FactoryRegistry::clear();
+    }
+
     public function testBuildBasicFactory()
     {
         $user = Factory::build('BasicUser');
 
-        $this->assertInstanceOf('\Fixture\Cartpenter\User', $user);
-        $this->assertAttributeEquals('Bob', 'username', $user);
-        $this->assertAttributeEquals('password1', 'password', $user);
+        $this->assertEquals([
+            'username' => 'Bob',
+            'password' => 'password1',
+        ], $user);
     }
 
     public function testBuildDynamicFactory()
     {
         $user = Factory::build('DynamicUser');
 
-        $this->assertInstanceOf('\Fixture\Cartpenter\User', $user);
-        $this->assertAttributeEquals('Bob', 'username', $user);
-        $this->assertAttributeEquals('password1', 'password', $user);
+        $this->assertEquals([
+            'username' => 'Bob',
+            'password' => sha1('Bobpassword1'),
+        ], $user);
     }
 
     public function testBuildTraitFactory()
     {
-        $user = Factory::build('TraitUser', 'deleted');
+        $user = Factory::build('ModifierUser', 'deleted');
 
-        $this->assertInstanceOf('\Fixture\Cartpenter\User', $user);
-        $this->assertAttributeEquals('Bob', 'username', $user);
-        $this->assertAttributeEquals(null, 'password', $user);
-        $this->assertAttributeEquals('deleted', 'status', $user);
+        $this->assertEquals([
+            'username' => 'Bob',
+            'password' => null,
+            'status' => 'deleted',
+        ], $user);
+    }
+
+    public function testCreateBasicFactory()
+    {
+        Configuration::$adapter = $this->getMockBuilder('\Carpenter\Adapter\ArrayAdapter')
+            ->setMethods(['persist'])
+            ->getMock();
+
+        $expected = [
+            'username' => 'Bob',
+            'password' => 'password1',
+        ];
+
+        Configuration::$adapter->expects($this->once())
+            ->method('persist')
+            ->will($this->returnValue($expected));
+
+        $user = Factory::create('BasicUser');
+
+        $this->assertEquals($expected, $user);
     }
 }
