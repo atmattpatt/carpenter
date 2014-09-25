@@ -2,6 +2,7 @@
     "name": "matthewpatterson/carpenter",
     "description": "A library to set up database models with test data",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Matthew Patterson",
