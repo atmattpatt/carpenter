@@ -2,8 +2,20 @@
 
 namespace Carpenter;
 
+/**
+ * Primary interface for building fixtures
+ */
 class Factory
 {
+    /**
+     * Build a new fixture without persisting it
+     *
+     * @param string $factory The name of the factory to build
+     * @param string $modifiers.. One or more modifiers to apply to the fixture
+     * @param array $overrides A key/value set of properties to override
+     * @return mixed The fixture specified by the factory
+     * @throws Carpenter\FactoryNotFoundException
+     */
     public static function build()
     {
         $arguments = func_get_args();
@@ -26,7 +38,15 @@ class Factory
         return $template->apply(Configuration::$adapter, $resolved);
     }
 
-
+    /**
+     * Build a new fixture and persist it in a data store
+     *
+     * @param string $factory The name of the factory to build
+     * @param string $modifiers.. One or more modifiers to apply to the fixture
+     * @param array $overrides A key/value set of properties to override
+     * @return mixed The fixture specified by the factory
+     * @throws Carpenter\FactoryNotFoundException
+     */
     public static function create()
     {
         $built = call_user_func_array('static::build', func_get_args());
@@ -35,6 +55,11 @@ class Factory
         return $built;
     }
 
+    /**
+     * Find available factories and registers them for use
+     *
+     * This method should be invoked before using any factories.
+     */
     public static function discoverFactories()
     {
         $finder = new FactoryFinder();

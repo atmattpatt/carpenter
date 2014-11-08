@@ -4,8 +4,18 @@ namespace Carpenter\Adapter;
 
 use ReflectionClass;
 
+/**
+ * Adapter to build array fixtures
+ */
 class ArrayAdapter implements AdapterInterface
 {
+    /**
+     * Builds an array
+     *
+     * @param string $_ ignored; no target class is instantiated
+     * @param mixed $resolved A factory with all properties resolved
+     * @return array
+     */
     public function build($_, $resolved)
     {
         $reflection = new ReflectionClass($resolved);
@@ -18,17 +28,26 @@ class ArrayAdapter implements AdapterInterface
         return $output;
     }
 
-    /** @codeCoverageIgnore */
+    /**
+     * Not used
+     * @codeCoverageIgnore
+     */
     public function persist($built)
     {
     }
 
-    /** @codeCoverageIgnore */
+    /**
+     * Not used
+     * @codeCoverageIgnore
+     */
     public function beginTransaction()
     {
     }
 
-    /** @codeCoverageIgnore */
+    /**
+     * Not used
+     * @codeCoverageIgnore
+     */
     public function rollback()
     {
     }
