@@ -1,0 +1,33 @@
+source:
+    - src/
+
+destination: ./build/docs
+
+extensions:
+    - php
+
+charset:
+    - UTF-8
+
+main: Carpenter
+
+title: Carpenter API Documentation
+
+autocomplete:
+    - classes
+    - methods
+    - properties
+
+accessLevels:
+    - public
+    - protected
+
+php: true
+
+tree: true
+
+deprecated: false
+
+todo: false
+
+download: false

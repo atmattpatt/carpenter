@@ -3,6 +3,10 @@
 
   <property name="bin" value="${basedir}/vendor/bin"/>
 
+  <target name="clean-docs">
+    <delete dir="${basedir}/build/docs"/>
+  </target>
+
   <target name="phpunit">
     <exec executable="${bin}/phpunit" failonerror="true">
       <arg value="--configuration"/>
@@ -17,6 +21,13 @@
       <arg value="--extensions=php"/>
       <arg path="${basedir}/src"/>
       <arg path="${basedir}/tests"/>
+    </exec>
+  </target>
+
+  <target name="apigen" depends="clean-docs">
+    <exec executable="${bin}/apigen">
+      <arg value="--config"/>
+      <arg path="${basedir}/apigen.neon"/>
     </exec>
   </target>
 
