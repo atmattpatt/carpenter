@@ -22,6 +22,10 @@ class FactoryRegistry
 
     public static function getTemplateForFactory($name)
     {
+        if (!static::isFactoryDefined($name)) {
+            throw new FactoryNotFoundException(sprintf('"%s" is not a registered factory', $name));
+        }
+
         return self::$factories[$name];
     }
 

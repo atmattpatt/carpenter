@@ -70,6 +70,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $user);
     }
 
+    /**
+     * @expectedException \Carpenter\FactoryNotFoundException
+     * @expectedExceptionMessage "ImaginaryFactory" is not a registered factory
+     */
+    public function testNonExistentFactory()
+    {
+        Factory::build('ImaginaryFactory');
+    }
+
     public function testDiscoverFactories()
     {
         Configuration::$factoryPaths = [__DIR__ . '/../Fixture'];
