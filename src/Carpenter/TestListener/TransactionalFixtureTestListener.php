@@ -34,7 +34,7 @@ class TransactionalFixtureTestListener implements \PHPUnit_Framework_TestListene
      * Not used
      * @codeCoverageIgnore
      */
-    public function addError(\PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
@@ -50,7 +50,7 @@ class TransactionalFixtureTestListener implements \PHPUnit_Framework_TestListene
      * Not used
      * @codeCoverageIgnore
      */
-    public function addIncompleteTest(\PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addIncompleteTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
@@ -58,7 +58,7 @@ class TransactionalFixtureTestListener implements \PHPUnit_Framework_TestListene
      * Not used
      * @codeCoverageIgnore
      */
-    public function addRiskyTest(\PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addRiskyTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
@@ -66,7 +66,7 @@ class TransactionalFixtureTestListener implements \PHPUnit_Framework_TestListene
      * Not used
      * @codeCoverageIgnore
      */
-    public function addSkippedTest(\PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addSkippedTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
