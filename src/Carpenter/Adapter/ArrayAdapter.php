@@ -18,14 +18,17 @@ class ArrayAdapter implements AdapterInterface
         return $output;
     }
 
+    /** @codeCoverageIgnore */
     public function persist($built)
     {
     }
 
+    /** @codeCoverageIgnore */
     public function beginTransaction()
     {
     }
 
+    /** @codeCoverageIgnore */
     public function rollback()
     {
     }
