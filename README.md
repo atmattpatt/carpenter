@@ -12,21 +12,13 @@ Add the following to a `composer.json` file:
 
 ```json
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/matthewpatterson/carpenter.git"
-        }
-    ],
     "require": {
         "matthewpatterson/carpenter": "*"
     }
 }
 ```
 
-Then run `composer install`.
-
-Eventually, this will be hosted on Packagist.
+Then, run `composer install`.
 
 Usage
 -----
