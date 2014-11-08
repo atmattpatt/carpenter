@@ -8,6 +8,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        static::$originalAdapter = Configuration::$adapter;
         Configuration::$adapter = new Adapter\ArrayAdapter();
         Factory::discoverFactories();
     }
@@ -15,6 +16,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         FactoryRegistry::clear();
+        Configuration::$adapter = static::$originalAdapter;
     }
 
     public function testBuildBasicFactory()
