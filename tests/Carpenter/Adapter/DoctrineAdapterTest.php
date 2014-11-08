@@ -61,6 +61,28 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
         Factory::create('DoctrineUser');
     }
 
+    public function testBeginTransaction()
+    {
+        $entityManager = $this->getMockEntityManager();
+        $adapter = new DoctrineAdapter($entityManager);
+
+        $entityManager->expects($this->once())
+            ->method('beginTransaction');
+
+        $adapter->beginTransaction();
+    }
+
+    public function testRollback()
+    {
+        $entityManager = $this->getMockEntityManager();
+        $adapter = new DoctrineAdapter($entityManager);
+
+        $entityManager->expects($this->once())
+            ->method('rollback');
+
+        $adapter->rollback();
+    }
+
     private function getMockEntityManager()
     {
         return $this->getMockForAbstractClass('Doctrine\\ORM\\EntityManagerInterface');

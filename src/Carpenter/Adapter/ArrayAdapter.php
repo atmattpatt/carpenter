@@ -21,4 +21,12 @@ class ArrayAdapter implements AdapterInterface
     public function persist($built)
     {
     }
+
+    public function beginTransaction()
+    {
+    }
+
+    public function rollback()
+    {
+    }
 }

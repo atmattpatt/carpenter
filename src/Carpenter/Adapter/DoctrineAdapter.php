@@ -37,4 +37,14 @@ class DoctrineAdapter implements AdapterInterface
             $this->entityManager->flush();
         }
     }
+
+    public function beginTransaction()
+    {
+        $this->entityManager->beginTransaction();
+    }
+
+    public function rollback()
+    {
+        $this->entityManager->rollback();
+    }
 }
