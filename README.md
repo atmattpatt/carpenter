@@ -117,7 +117,7 @@ class UserFactory
 $user = Carpenter\Factory::build('User');
 $user->firstName == "Quincy";
 
-$user = Carpenter\Factory::build('User', ["firstName" => "George");
+$user = Carpenter\Factory::build('User', ["firstName" => "George"]);
 $user->firstName == "George";
 ```
 
