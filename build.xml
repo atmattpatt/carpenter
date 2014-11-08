@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="matthewpatterson/carpenter" default="phpunit">
+
+  <property name="bin" value="${basedir}/vendor/bin"/>
+
+  <target name="phpunit">
+    <exec executable="${bin}/phpunit" failonerror="true">
+      <arg value="--configuration"/>
+      <arg path="${basedir}/phpunit.xml.dist"/>
+    </exec>
+  </target>
+
+  <target name="phpcs">
+    <exec executable="${bin}/phpcs" failonerror="true">
+      <arg value="-p"/>
+      <arg value="--standard=PSR2"/>
+      <arg value="--extensions=php"/>
+      <arg path="${basedir}/src"/>
+      <arg path="${basedir}/tests"/>
+    </exec>
+  </target>
+
+  <target name="check" depends="phpunit,phpcs"/>
+</project>

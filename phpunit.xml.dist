@@ -11,15 +11,18 @@
          syntaxCheck="false"
          bootstrap="./tests/bootstrap.php"
 >
-    <testsuites>
-        <testsuite name="Carpenter Test Suite">
-            <directory>./tests/Carpenter/</directory>
-        </testsuite>
-    </testsuites>
+  <testsuites>
+    <testsuite name="Carpenter Test Suite">
+      <directory>./tests/Carpenter/</directory>
+    </testsuite>
+  </testsuites>
 
-    <filter>
-        <whitelist>
-            <directory>./src/Carpenter/</directory>
-        </whitelist>
-    </filter>
+  <filter>
+    <whitelist>
+      <directory>./src/Carpenter/</directory>
+    </whitelist>
+  </filter>
+
+  <logging>
+  </logging>
 </phpunit>
