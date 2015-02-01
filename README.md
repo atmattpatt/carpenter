@@ -4,6 +4,7 @@ Carpenter
 A PHP library for setting up database fixtures, heavily inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl).
 
 [![Build Status](https://travis-ci.org/matthewpatterson/carpenter.svg?branch=master)](https://travis-ci.org/matthewpatterson/carpenter)
+[![Analytics](https://ga-beacon.appspot.com/UA-43004538-2/matthewpatterson/carpenter)](https://github.com/igrigorik/ga-beacon)
 
 Installation
 ------------
